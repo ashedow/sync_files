@@ -22,11 +22,7 @@ mix test
 
 Run app, for exampel, like
 ```bash
-mix run --no-halt
-```
-
-```bash
-iex -S mix
+./app --src <src@host:/dir> --dest <dest@host:/dir>
 ```
 
 ## TODO:
