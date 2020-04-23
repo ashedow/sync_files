@@ -1,6 +1,6 @@
 alias App.Structs.{
   FileSystem,
-  DestFileSystem
+  TypedFileSystem
 }
 
 defmodule App.Application do
@@ -10,20 +10,19 @@ defmodule App.Application do
 
   use Application
 
+  @doc """
+  Start app endpoint
+  """
   def start(_type, _args) do
-    ## TODO move trying getting param from env into cli module
-    source = Application.fetch_env!(:app, :source)
-    destination = Application.fetch_env!(:app, :destination)
-
     opts = [
-      source: build_host(source),
-      destination: build_host(destination)
+      source: build_source(src),
+      destination: build_target(dest)
     ]
 
     # link = App.start_link(opts)
     children = [
     # Starts a worker by calling: App.Worker.start_link(arg)
-    # {App.Worker, arg}
+      {App.Worker, arg}
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html
@@ -32,15 +31,18 @@ defmodule App.Application do
     Supervisor.start_link(children, opts)
   end
 
+  defp build_source(source) do
+    source_map[source[:source]].build_source(source)
+  end
 
-  defp build_host(host) do
-    source_map[host[:host]].build_source(host)
+  defp build_target(target) do
+    source_map[target[:source]].build_target(target)
   end
 
   defp source_map do
     %{
-      src: FileSystem,
-      dest: FileSystem
+      source: FileSystem,
+      destination: FileSystem
     }
   end
 

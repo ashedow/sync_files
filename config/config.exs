@@ -23,17 +23,24 @@ import_config "../apps/*/config/config.exs"
 #   end
 # end
 
-
-
 ## Example of third party dependency
 # config :logger,
   # verbose: true
 
+# App params
+ssh_keys_path = "~/.ssh/" # ssh dir path
+ssh_secret_key = "#{:ssh_keys_path}id_rsa" # ssh secret key
+ssh_pub_key = "#{:ssh_keys_path}id_rsa.pub" # ssh pub key
 
 # Configures Elixir's Logger
 config :logger, :console,
   format: "$time $metadata[$level] $message\n",
   metadata: [:request_id]
+
+# Config env vars
+config :app,
+  src: {:system, "SRC"},
+  dest: {:system, "DEST"}
 
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.

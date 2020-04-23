@@ -8,13 +8,18 @@ defmodule App.CLI do
   HOST="home@192.168.0.10://shared_dir" DEST="storage@192.168.0.11://dest_dir" NOTIFY="my@my.me"
   """
   require Logger
+  alias App.ReadConfig
 
   @doc """
   Main App.CLI runner.
   Parse command line args and run app.
   """
   def main(args \\ []) do
-    args |> parse_args |> process
+    args
+    |> parse_args
+    |> process
+    |> validate
+    |> run
   end
 
   @args """
@@ -39,16 +44,21 @@ defmodule App.CLI do
       { [src: src, dest: dest], _, _}
         -> {src, dest}
 
+      {[], [], []}
+        -> []
+
       _ ->
         :error
     end
   end
 
   @doc """
-  Parse args from command line and run app
+  Parse args from command line or|and env and run app.
   """
   def process([]) do
-    IO.puts("No arguments given")
+    src = ReadConfig.read_config(Application.get_env(:app, :src))
+    dest = ReadConfig.read_config(Application.get_env(:app, :dest))
+    {src, dest}
   end
 
   def process(:help) do
@@ -59,14 +69,13 @@ defmodule App.CLI do
     --help or -h     Show this help message.
     --src  Host and dir where to get data
     --dest  Host and dir where to put data
+
+    Also you can pass all arg as environment variables.
     """
   end
 
   def process({src, dest}) do
     {src, dest}
-    |> validate_navigator
-    |> App.start
-    Logger.info("Starting with Host: #{src} Directory: #{dest}")
   end
 
   @doc """
@@ -81,7 +90,9 @@ defmodule App.CLI do
 
   end
 
-  defp src, do: System.get_env("HOST")
-  defp dest, do: System.get_env("DEST")
+  def run({src, dest}) do
+    App.start
+    Logger.info("Starting with Host: #{src} Directory: #{dest}")
+  end
 
 end
