@@ -8,6 +8,8 @@ defmodule App.Rsync do
   Temporary implementation!
   rsync like function, that run if we got new files on host dir
   """
+  require App.Scripts.Logger
+
   defp rsync(src, dest) do
 
   end

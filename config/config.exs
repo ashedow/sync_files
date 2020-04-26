@@ -32,6 +32,10 @@ ssh_keys_path = "~/.ssh/" # ssh dir path
 ssh_secret_key = "#{:ssh_keys_path}id_rsa" # ssh secret key
 ssh_pub_key = "#{:ssh_keys_path}id_rsa.pub" # ssh pub key
 
+config :app, App.Monitor,
+  host: [default_port: 22], # default ssh port
+  interval: 10_000 # Worker interval
+
 # Configures Elixir's Logger
 config :logger, :console,
   format: "$time $metadata[$level] $message\n",

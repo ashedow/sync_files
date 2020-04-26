@@ -1,4 +1,4 @@
-defmodule App.ReadConfig do
+defmodule App.Scripts.ReadConfig do
 
   def read_config({:system, environment_variable_name}) do
     System.get_env(environment_variable_name)

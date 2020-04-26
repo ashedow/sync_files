@@ -4,6 +4,8 @@ defmodule App.FlatFiles do
   Copied from http://www.thegreatcodeadventure.com/elixir-tricks-building-a-recursive-function-to-list-all-files-in-a-directory/
   """
 
+  require App.Scripts.Logger
+
   def list_all(filepath) do
       _list_all(filepath)
   end

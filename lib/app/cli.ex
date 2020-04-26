@@ -7,8 +7,9 @@ defmodule App.CLI do
   ## Example
   HOST="home@192.168.0.10://shared_dir" DEST="storage@192.168.0.11://dest_dir" NOTIFY="my@my.me"
   """
-  require Logger
-  alias App.ReadConfig
+  require App.Scripts.Logger
+  alias App.Scripts.ReadConfig
+  alias App.Monitor.Protocol
 
   @doc """
   Main App.CLI runner.
