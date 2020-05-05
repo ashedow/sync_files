@@ -8,7 +8,6 @@ defmodule App.MixProject do
       elixir: "~> 1.10",
       build_embedded: Mix.env == :prod,
       start_permanent: Mix.env() == :prod,
-      docs: docs(),
       deps: deps(),
       escript: escript(),
       aliases: aliases(),
@@ -26,7 +25,6 @@ defmodule App.MixProject do
   defp deps do
     [
       {:file_system, "~> 0.2"},
-      {:httpoison, "~> 0.13"},
       {:ex_doc, "~> 0.19", only: :dev, runtime: false},
     ]
   end
@@ -46,5 +44,5 @@ defmodule App.MixProject do
       # like mix child_app_name_test test/child_app_name_test.exs
       child_app_name_test: "cmd --app child_app_name mix test --color"
     ]
-
+  end
 end

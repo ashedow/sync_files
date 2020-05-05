@@ -22,11 +22,18 @@ mix test
 
 Run app, for exampel, like
 ```bash
-./app --src <src@host:/dir> --dest <dest@host:/dir>
+./app --src <src@host:port:/dir> --dest <dest@host:port:/dir>
 ```
+or
+```bash
+export SRC=<src@host:port:/dir> DEST=<dest@host:port:/dir>
+./app
+```
+use `dest@host::/dir` for default 22 port
 
 ## TODO:
 
+* [ ] Custom path to ssh_keys
 * [ ] Decentralized (P2P)
 * [ ] Neighborhood discovery (local network)
 * [ ] Sync even behind different NATs

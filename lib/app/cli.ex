@@ -8,8 +8,12 @@ defmodule App.CLI do
   HOST="home@192.168.0.10://shared_dir" DEST="storage@192.168.0.11://dest_dir" NOTIFY="my@my.me"
   """
   require App.Scripts.Logger
-  alias App.Scripts.ReadConfig
-  alias App.Monitor.Protocol
+  alias App.Scripts.{
+    ReadConfig,
+    Validation
+  }
+  alias App.Structs.FileSystem
+  # alias App.Monitor.Protocol
 
   @doc """
   Main App.CLI runner.
@@ -83,17 +87,15 @@ defmodule App.CLI do
   Validate provided source and destination hosts
   Check (for now) ssh keys
   """
-  def validate(src, dest) do
-    # parse each host and try to connect to each over ssh (by default check ./ssh/id_rsa*)
-    #continue if ok and abort if can't
-      # Logger.error("Can not connect to #{}")
-      # exit("ERROR while trying to connect to host")
-
+  def validate({src, dest}) do
+    host_list = Tuple.to_list({src, dest})
+    parced_hosts = Enum.map(host_list, fn x -> Validation.validate_input_host(x) end)
+    parced_hosts
   end
 
   def run({src, dest}) do
-    App.start
     Logger.info("Starting with Host: #{src} Directory: #{dest}")
+    App.start
   end
 
 end

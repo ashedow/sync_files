@@ -1,6 +1,4 @@
-alias App.Structs.{
-  FileSystem,
-  TypedFileSystem
+alias App.Structs.FileSystem
 }
 
 defmodule App.Application do

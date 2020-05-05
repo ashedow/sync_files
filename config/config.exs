@@ -31,10 +31,13 @@ import_config "../apps/*/config/config.exs"
 ssh_keys_path = "~/.ssh/" # ssh dir path
 ssh_secret_key = "#{:ssh_keys_path}id_rsa" # ssh secret key
 ssh_pub_key = "#{:ssh_keys_path}id_rsa.pub" # ssh pub key
+ssh_port = 22
+
+interval = 10_000 # Worker interval
 
 config :app, App.Monitor,
-  host: [default_port: 22], # default ssh port
-  interval: 10_000 # Worker interval
+  host: [default_port: ssh_port],
+  interval: interval
 
 # Configures Elixir's Logger
 config :logger, :console,
@@ -44,7 +47,8 @@ config :logger, :console,
 # Config env vars
 config :app,
   src: {:system, "SRC"},
-  dest: {:system, "DEST"}
+  dest: {:system, "DEST"},
+  port: ssh_port
 
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
