@@ -1,6 +1,7 @@
 ### IDE files ###
 .idea
 .vscode
+.vscode.code-workspace
 
 # Ignore all local history of files
 .history

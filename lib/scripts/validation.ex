@@ -22,7 +22,6 @@ defmodule App.Scripts.Validation do
   defp to_sruct(host) do
     port = Application.fetch_env!(:app, :ssh_port)
     parced_host_map = Regex.named_captures(~r/(?<name>[-\w\d_]*)@(?<host>[-\w\d.]*):(?<port>[\d]*):(?<dir>[-\w\d.\/]+)/, host)
-
   end
 
 end
