@@ -20,7 +20,7 @@ defmodule App.Scripts.Validation do
   Convert string to map and raise Error if can't
   """
   defp to_sruct(host) do
-    port = Application.fetch_env!(:app, :ssh_port)
+    port = SyncFiles.fetch_env!(:app, :ssh_port)
     parced_host_map = Regex.named_captures(~r/(?<name>[-\w\d_]*)@(?<host>[-\w\d.]*):(?<port>[\d]*):(?<dir>[-\w\d.\/]+)/, host)
   end
 

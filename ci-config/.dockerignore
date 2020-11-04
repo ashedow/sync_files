@@ -11,6 +11,7 @@ docker
 # Mix artifacts
 _build
 deps
+test
 *.ez
 
 # we're going to store our releases in the releases directory, we don't need to copy these files into the container

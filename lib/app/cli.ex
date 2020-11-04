@@ -93,9 +93,9 @@ defmodule App.CLI do
     parced_hosts
   end
 
-  def run({src, dest}) do
+  def run({options,args}) do
     Logger.info("Starting with Host: #{src} Directory: #{dest}")
-    App.start
+    SyncFiles.start
   end
 
 end

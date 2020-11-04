@@ -31,6 +31,15 @@ export SRC=<src@host:port:/dir> DEST=<dest@host:port:/dir>
 ```
 use `dest@host::/dir` for default 22 port
 
+Or
+```bash
+iex -S mix
+```
+or
+```bash
+mix run --no-halt
+```
+
 ## TODO:
 
 * [ ] Custom path to ssh_keys

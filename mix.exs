@@ -9,15 +9,20 @@ defmodule App.MixProject do
       build_embedded: Mix.env == :prod,
       start_permanent: Mix.env() == :prod,
       deps: deps(),
-      escript: escript(),
-      aliases: aliases(),
+      escript: escript()
     ]
+  end
+
+  defp escript do
+    [main_module: App.CLI]
   end
 
   # Run "mix help compile.app" to learn about applications.
   def application do
     [
-      extra_applications: [:logger, :ssh]
+      extra_applications: [:logger, :ssh],
+      applications: [],
+      mod: { App, [] }
     ]
   end
 
@@ -29,20 +34,4 @@ defmodule App.MixProject do
     ]
   end
 
-  @doc """
-  Run as CLI
-  """
-  defp escript do
-    [main_module: App.CLI]
-  end
-
-  @doc """
-  Define aliases for run app, tests, tests for child app
-  """
-  def aliases do
-    [
-      # like mix child_app_name_test test/child_app_name_test.exs
-      child_app_name_test: "cmd --app child_app_name mix test --color"
-    ]
-  end
 end

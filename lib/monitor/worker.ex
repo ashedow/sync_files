@@ -1,4 +1,4 @@
-defmodule Monitor.Worker do
+defmodule App.Monitor.Worker do
   @moduledoc """
   Monitor worker
   """
@@ -26,7 +26,8 @@ defmodule Monitor.Worker do
       state:    state,
       interval: interval,
     }
-    GenServer.start_link(__MODULE__, data)
+    # start the GenServer with a `name` option.
+    GenServer.start_link(__MODULE__, data, name: :sync_files)
   end
 
   @doc """
