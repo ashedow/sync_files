@@ -7,13 +7,12 @@ defmodule App.CLI do
   ## Example
   HOST="home@192.168.0.10://shared_dir" DEST="storage@192.168.0.11://dest_dir" NOTIFY="my@my.me"
   """
-  require App.Scripts.Logger
+
   alias App.Scripts.{
     ReadConfig,
-    Validation
+    Validation,
+    Logger
   }
-  alias App.Structs.FileSystem
-  # alias App.Monitor.Protocol
 
   @doc """
   Main App.CLI runner.
@@ -93,7 +92,7 @@ defmodule App.CLI do
     parced_hosts
   end
 
-  def run({options,args}) do
+  def run({src, dest}) do
     Logger.info("Starting with Host: #{src} Directory: #{dest}")
     SyncFiles.start
   end

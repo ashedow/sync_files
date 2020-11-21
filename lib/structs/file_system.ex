@@ -2,13 +2,11 @@ defmodule App.Structs.FileSystem do
   @moduledoc """
   FileSystem struct module
   """
-
-  require App.Scripts.Logger
-  require App.Monitor.SSHConn
-
-  @enforce_keys [:user, :host, :port, :dir]
-
-  defstruct @enforce_keys
+  alias App.Structs.{
+    FSStruct,
+    Logger,
+    SSHConn
+  }
 
   @doc "Return a new struct for given params"
   def new(user, host, port, dir) do
@@ -18,24 +16,18 @@ defmodule App.Structs.FileSystem do
     validate_port!(port)
     validate_conn!(user, host, port, dir)
 
-    %FileSystem{user: user, host: host, port: port, dir: dir}
+    %FSStruct{user: user, host: host, port: port, dir: dir}
   end
 
-  @doc """
-  Check port and set default otherwise
-  """
   defp validate_port!(port) do
     port = String.to_integer(port)
-    case is_number(port) && (port n in 1..64738) do
+    case is_number(port) && (port in 1..64738) do
       true -> :ok
       false ->
         port = 22
     end
   end
 
-  @doc """
-  Check param and raise if not
-  """
   defp validate_param!(param) do
     case param do
       true -> :ok
@@ -44,9 +36,6 @@ defmodule App.Structs.FileSystem do
     end
   end
 
-  @doc """
-  Raise error if can't connect with params
-  """
   defp validate_conn!(user, host, port, dir) do
     case SSHConn.validate_conn(user, host, port, dir) do
       true -> :ok

@@ -6,6 +6,8 @@ defmodule App.Monitor.SSHConn do
   @doc """
   Check that ssh connection avaliable
   """
+  def validate_conn(nil), do: nil
+
   def validate_conn(host, user, port, dir) do
     :ssh.start()
     {:ok, conn} = :ssh.connect(host, port,

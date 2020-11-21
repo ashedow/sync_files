@@ -8,8 +8,9 @@ defmodule App.Monitor.Worker do
   @doc """
   Struct defenition for pereodic worker.
   """
-  defstruct [:work_fn, :parent, :state, interval: interval]
+  # defstruct [:work_fn, :parent, :state, interval: interval] # TODO: try to import interval from config
   # defstruct [:work_fn, :parent, :state, interval: 10_000]
+  defstruct [:work_fn, :parent, :state, :interval]
 
   alias __MODULE__, as: PW
 

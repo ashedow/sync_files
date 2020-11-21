@@ -62,7 +62,7 @@ defmodule Map.Helpers do
 
   def stringify_keys(map = %{}) do
     map
-    |> Enum.map(fn {k, v} -> {stringify_key(k), stringify_keys(v)} end)
+    |> Enum.map(fn {k, v} -> {Atom.to_string(k), stringify_keys(v)} end)
     |> Enum.into(%{})
   end
 

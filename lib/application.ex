@@ -28,11 +28,11 @@ defmodule SyncFiles do
     # for other strategies and supported options
     # opts = [strategy: :one_for_one, name: App.Supervisor]
     # worker(App.Monitor.Worker, [])
-    Supervisor.start_link(children, opts)
+    Supervisor.start_link(opts)
   end
 
   defp build_path(path) do
-    FileSystem.new(path)
+    FileSystem.new(%{path: path})
   end
 
 end
